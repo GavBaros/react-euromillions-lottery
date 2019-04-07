@@ -12,9 +12,16 @@ input {
   width: 2rem;
   margin: 0.1rem;
 }
+span {
+  font-size: 2rem;
+  position: absolute;
+  bottom: 2.5px;
+  cursor: pointer;
+}
 
 .App {
   text-align: center;
+  position: relative;
 }
 
 .App-logo {
