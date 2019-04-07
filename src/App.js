@@ -1,25 +1,49 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 class App extends Component {
+  state = {};
+
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value }, () =>
+      console.log(this.state)
+    );
+  };
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <input
+          type="text"
+          name="input1"
+          value={this.state.input1}
+          onChange={this.handleChange}
+        />
+        <input
+          type="text"
+          name="input2"
+          value={this.state.input2}
+          onChange={this.handleChange}
+        />
+        <input
+          type="text"
+          name="input3"
+          value={this.state.input3}
+          onChange={this.handleChange}
+        />
+        <input
+          type="text"
+          name="input4"
+          value={this.state.input4}
+          onChange={this.handleChange}
+        />
+        <input
+          type="text"
+          name="input5"
+          value={this.state.input5}
+          onChange={this.handleChange}
+        />
       </div>
     );
   }
