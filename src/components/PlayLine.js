@@ -4,7 +4,15 @@ class PlayLine extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      input_1: "",
+      input_2: "",
+      input_3: "",
+      input_4: "",
+      input_5: "",
+      input_6: "",
+      input_7: ""
+    };
 
     this.clearedState = {
       input_1: "",
