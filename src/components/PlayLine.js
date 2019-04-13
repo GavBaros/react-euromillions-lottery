@@ -24,7 +24,18 @@ class PlayLine extends Component {
       input_7: ""
     };
 
-    this.inputs = [1, 2, 3, 4, 5, 6, 7];
+    this.numberOfInputs = [1, 2, 3, 4, 5, 6, 7];
+
+    this.inputRanges = {
+      normal: {
+        min: 1,
+        max: 50
+      },
+      luckyStar: {
+        min: 1,
+        max: 12
+      }
+    };
   }
 
   populateInputsWithRandomNumbers = () => {
@@ -56,13 +67,21 @@ class PlayLine extends Component {
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
 
+  handleInvalidValues = value => this.showOnlyNumericValues(value);
+
+  showOnlyNumericValues = value =>
+    isNaN(value) ? "" : this.makeNumericValuesWithinRange(value);
+
+  makeNumericValuesWithinRange = value =>
+    value >= 1 && value <= 50 ? value : "";
+
   renderInputs = () => {
-    return this.inputs.map(num => (
+    return this.numberOfInputs.map(num => (
       <input
         key={num}
         type="text"
         name={`input_${num}`}
-        value={this.state[`input_${num}`]}
+        value={this.handleInvalidValues(this.state[`input_${num}`])}
         onChange={this.handleChange}
       />
     ));
