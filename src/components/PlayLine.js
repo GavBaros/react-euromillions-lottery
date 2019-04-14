@@ -24,9 +24,9 @@ class PlayLine extends Component {
       input_7: ""
     };
 
-    this.numberOfInputs = [1, 2, 3, 4, 5, 6, 7];
+    this.numberOfInputsToRender = [1, 2, 3, 4, 5, 6, 7];
 
-    this.inputRanges = {
+    this.inputValueRanges = {
       normal: {
         min: 1,
         max: 50
@@ -39,18 +39,26 @@ class PlayLine extends Component {
   }
 
   populateInputsWithRandomNumbers = () => {
-    const changedClearedState = this.changeClearedStateValues();
-    this.setState(changedClearedState);
+    const objectWithRandomValues = this.assignRandomValuesToObject();
+    this.setState(objectWithRandomValues);
   };
 
-  changeClearedStateValues = () => {
-    let clearedStateCopy = { ...this.clearedState };
+  assignRandomValuesToObject = () => {
+    const cloneObject = { ...this.clearedState };
+    const { normal, luckyStar } = this.inputValueRanges;
 
-    Object.keys(clearedStateCopy).forEach(
-      key => (clearedStateCopy[key] = Math.floor(Math.random() * 50 + 1))
-    );
+    Object.keys(cloneObject).forEach(key => {
+      if (key === "input_6" || key === "input_7") {
+        return this.assignRandomNumberToKey(cloneObject, key, luckyStar.max);
+      }
+      return this.assignRandomNumberToKey(cloneObject, key, normal.max);
+    });
 
-    return clearedStateCopy;
+    return cloneObject;
+  };
+
+  assignRandomNumberToKey = (object, key, maxValue) => {
+    return (object[key] = Math.floor(Math.random() * maxValue + 1));
   };
 
   handleLuckyDipClick = () => {
@@ -65,24 +73,27 @@ class PlayLine extends Component {
   clearAllInputs = () =>
     this.setState({ ...this.clearedState, luckyDipClicked: false });
 
-  handleChange = e => this.setState({ [e.target.name]: e.target.value });
+  handleInputChange = ({ target: { name, value } }) => {
+    const { luckyStar, normal } = this.inputValueRanges;
+    const range = name === "input_6" || name === "input_7" ? luckyStar : normal;
 
-  handleInvalidValues = value => this.showOnlyNumericValues(value);
+    this.setState({ [name]: this.validate(value, range) });
+  };
 
-  showOnlyNumericValues = value =>
-    isNaN(value) ? "" : this.makeNumericValuesWithinRange(value);
+  validate = (value, range) =>
+    isNaN(value) ? "" : this.onlyShowNumberWithinRange(value, range);
 
-  makeNumericValuesWithinRange = value =>
-    value >= 1 && value <= 50 ? value : "";
+  onlyShowNumberWithinRange = (value, { min, max }) =>
+    value >= min && value <= max ? value : "";
 
   renderInputs = () => {
-    return this.numberOfInputs.map(num => (
+    return this.numberOfInputsToRender.map((num, index) => (
       <input
         key={num}
         type="text"
         name={`input_${num}`}
-        value={this.handleInvalidValues(this.state[`input_${num}`])}
-        onChange={this.handleChange}
+        value={this.state[`input_${num}`]}
+        onChange={this.handleInputChange}
       />
     ));
   };
@@ -92,7 +103,9 @@ class PlayLine extends Component {
       <div className="App">
         <button onClick={this.handleLuckyDipClick}>Lucky Dip</button>
         {this.renderInputs()}
-        <span onClick={this.clearAllInputs}>&times;</span>
+        <span onClick={this.clearAllInputs}>
+          <img src="times-solid.svg" />
+        </span>
       </div>
     );
   }
