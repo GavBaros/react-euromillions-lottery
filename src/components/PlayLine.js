@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { CountUp } from "countup.js";
+import PlayLineInput from "./PlayLineInput";
 
 class PlayLine extends Component {
   constructor(props) {
@@ -36,6 +38,8 @@ class PlayLine extends Component {
         max: 12
       }
     };
+
+    this.myRef = React.createRef();
   }
 
   async populateInputsWithRandomNumbers() {
@@ -57,8 +61,36 @@ class PlayLine extends Component {
     return cloneObject;
   };
 
+  // animateValue = (id, start, end, duration) => {
+  //   let range = end - start;
+  //   let current = start;
+  //   let increment = end > start ? 1 : -1;
+  //   let stepTime = Math.abs(Math.floor(duration / range));
+  //   let obj = this.myRef.current;
+  //   let timer = setInterval(() => {
+  //     current += increment;
+  //     obj.value = current;
+  //     // this.myRef.current.value = current;
+  //
+  //     if (current == end) {
+  //       clearInterval(timer);
+  //     }
+  //   }, stepTime);
+  // };
+
   assignRandomNumberToKey = (object, key, maxValue) => {
-    return (object[key] = Math.floor(Math.random() * maxValue + 1));
+    let CountUpOptions = {
+      duration: 1
+    };
+    const countUp = new CountUp(
+      key,
+      Math.floor(Math.random() * maxValue + 1),
+      CountUpOptions
+    );
+
+    // let z = this.animateValue(key, 0, Math.floor(Math.random() * 50 + 1), 250);
+
+    return (object[key] = countUp.start());
   };
 
   handleLuckyDipClick = () => {
@@ -83,19 +115,35 @@ class PlayLine extends Component {
   validate = (value, range) =>
     isNaN(value) ? "" : this.onlyShowNumberWithinRange(value, range);
 
-  onlyShowNumberWithinRange = (value, { min, max }) =>
-    value >= min && value <= max ? value : "";
+  onlyShowNumberWithinRange = (value, { min, max }) => {
+    return value >= min && value <= max ? value : "";
+  };
 
   renderInputs = () => {
-    return this.numberOfInputsToRender.map((num, index) => (
-      <input
-        key={num}
-        type="text"
-        name={`input_${num}`}
-        value={this.state[`input_${num}`]}
-        onChange={this.handleInputChange}
-      />
-    ));
+    // let countUp = new CountUp("input", 12]);
+
+    return this.numberOfInputsToRender.map((num, index) => {
+      return (
+        <input
+          ref={this.myRef}
+          id={`input_${num}`}
+          key={num}
+          type="text"
+          name={`input_${num}`}
+          value={this.state[`input_${num}`]}
+          onChange={this.handleInputChange}
+        />
+      );
+
+      // return (
+      //   <PlayLineInput
+      //     key={num}
+      //     name={`input_${num}`}
+      //     value={this.state[`input_${num}`]}
+      //     onChange={this.handleInputChange}
+      //   />
+      // );
+    });
   };
 
   render() {
@@ -106,8 +154,8 @@ class PlayLine extends Component {
         <div className="clear" onClick={this.clearAllInputs}>
           <img src="times-solid.svg" />
         </div>
-        <i className="fa fa-star" />
-        <i className="fa fa-star" />
+        <i className="fa fa-star fa-xs" />
+        <i className="fa fa-star fa-xs" />
       </div>
     );
   }
