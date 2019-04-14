@@ -100,12 +100,13 @@ class PlayLine extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="playline">
         <button onClick={this.handleLuckyDipClick}>Lucky Dip</button>
         {this.renderInputs()}
-        <span onClick={this.clearAllInputs}>
+
+        <div className="clear" onClick={this.clearAllInputs}>
           <img src="times-solid.svg" />
-        </span>
+        </div>
       </div>
     );
   }

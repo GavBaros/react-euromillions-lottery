@@ -11,27 +11,50 @@ input {
   font-size: 1.14285714em;
   width: 2rem;
   margin: 0.1rem;
+  margin-left: 0.2rem;
 }
 span {
   position: absolute;
   bottom: 2.5px;
   cursor: pointer;
 
-  height: 2rem;
+  height: 1.95rem;
   width: 2rem;
   border-radius: 5px;
-  border: 1px solid black;
+  margin-left: 0.2rem;
   background-color: #fff;
 }
 
 span:hover {
-  background-color: whitesmoke;
+  background-color: darkgray;
+}
+
+span:active {
+  background-color: gray;
 }
 
 img {
   height: 0.9rem;
-  margin: 0.5rem;
-  margin-left: 0.6rem;
+  margin-left: 0.3rem;
+  margin-top: 0.5rem;
+}
+
+button {
+  min-width: 83px;
+  padding-bottom: 1.45rem;
+  padding-top: 0.52rem;
+  height: 2.25em;
+  text-align: center;
+  color: #000;
+  background-color: #fff;
+  border-radius: 5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: none;
+}
+button:focus,
+input:focus {
+  outline: 0;
 }
 
 .App {
@@ -39,32 +62,40 @@ img {
   position: relative;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.playline {
+  background-color: white;
+  position: relative;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 5px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.playline:hover {
+  background-color: whitesmoke;
 }
 
-.App-link {
-  color: #61dafb;
+.playline * {
+  margin-right: 0.2rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.clear {
+  float: right;
+  cursor: pointer;
+  height: 1.95rem;
+  width: 2rem;
+  border-radius: 5px;
+  margin-left: 0.2rem;
+  margin-top: 0.15rem;
+  background-color: #fff;
+}
+
+.clear:hover {
+  background-color: darkgray;
+}
+
+.clear:active {
+  background-color: gray;
 }
