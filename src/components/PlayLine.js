@@ -38,10 +38,10 @@ class PlayLine extends Component {
     };
   }
 
-  populateInputsWithRandomNumbers = () => {
-    const objectWithRandomValues = this.assignRandomValuesToObject();
+  async populateInputsWithRandomNumbers() {
+    const objectWithRandomValues = await this.assignRandomValuesToObject();
     this.setState(objectWithRandomValues);
-  };
+  }
 
   assignRandomValuesToObject = () => {
     const cloneObject = { ...this.clearedState };
@@ -103,10 +103,11 @@ class PlayLine extends Component {
       <div className="playline">
         <button onClick={this.handleLuckyDipClick}>Lucky Dip</button>
         {this.renderInputs()}
-
         <div className="clear" onClick={this.clearAllInputs}>
           <img src="times-solid.svg" />
         </div>
+        <i className="fa fa-star" />
+        <i className="fa fa-star" />
       </div>
     );
   }
