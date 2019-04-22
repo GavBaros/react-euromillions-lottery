@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import * as S from "./styles";
 
 class PlayLineInput extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class PlayLineInput extends Component {
 
   render() {
     return (
-      <input
+      <S.Input
         id={this.props.name}
         key={this.props.id}
         type="text"

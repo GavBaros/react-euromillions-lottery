@@ -1,5 +1,6 @@
-import React, { Component, memo, Fragment } from "react";
+import React, { Component, Fragment } from "react";
 import PlayLineInput from "../PlayLineInput";
+import * as S from "./styles";
 
 class PlayLine extends Component {
   constructor(props) {
@@ -80,15 +81,15 @@ class PlayLine extends Component {
 
   render() {
     return (
-      <div className="playline">
-        <button onClick={this.handleLuckyDipClick}>Lucky Dip</button>
+      <S.PlayLineWrapper>
+        <S.Button onClick={this.handleLuckyDipClick}>Lucky Dip</S.Button>
         {this.renderInputs()}
-        <div className="clear" onClick={this.clearAllInputs}>
-          <img src="times-solid.svg" />
-        </div>
-        <i className="fa fa-star fa-xs" />
-        <i className="fa fa-star fa-xs" />
-      </div>
+        <S.Clear onClick={this.clearAllInputs}>
+          <S.Image src="times-solid.svg" alt="cross icon" />
+        </S.Clear>
+        <S.Icon className="fa fa-star" />
+        <S.Icon className="fa fa-star " />
+      </S.PlayLineWrapper>
     );
   }
 }
