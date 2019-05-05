@@ -37,7 +37,7 @@ export const Button = styled.button`
   }
 
   &:hover {
-    background-color: darkgray;
+    background-color: lightgray;
   }
 `;
 
@@ -76,8 +76,9 @@ export const Icon = styled.i`
   }
 `;
 
-export const Image = styled.img`
-  height: 0.9rem;
-  margin-left: 0.3rem;
+export const Plus = styled.i`
+  transform: rotate(45deg);
+  color: #0066cc;
   margin-top: 0.5rem;
+  margin-left: 0.3rem;
 `;

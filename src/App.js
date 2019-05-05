@@ -4,7 +4,7 @@ import "./App.css";
 import styled from "styled-components";
 
 const Container = styled.div`
-  background: yellow;
+  background: #fff100;
   padding: 50px;
   height: 800px;
   position: relative;
@@ -88,7 +88,7 @@ const WhichDrawsCheckBox = styled.span`
   }
 
   &:hover {
-    background-color: darkgray;
+    background-color: lightgray;
   }
 
   &:active {

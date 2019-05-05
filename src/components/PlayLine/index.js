@@ -85,10 +85,10 @@ class PlayLine extends Component {
         <S.Button onClick={this.handleLuckyDipClick}>Lucky Dip</S.Button>
         {this.renderInputs()}
         <S.Clear onClick={this.clearAllInputs}>
-          <S.Image src="times-solid.svg" alt="cross icon" />
+          <S.Plus className="fa fa-plus" />
         </S.Clear>
         <S.Icon className="fa fa-star" />
-        <S.Icon className="fa fa-star " />
+        <S.Icon className="fa fa-star" />
       </S.PlayLineWrapper>
     );
   }
